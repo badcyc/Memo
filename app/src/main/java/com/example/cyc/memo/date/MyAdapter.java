@@ -1,5 +1,6 @@
 package com.example.cyc.memo.date;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cyc.memo.EditActivity;
 import com.example.cyc.memo.R;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private ImageView iconTitleIv;
         public ViewHolder(View view){
             super(view);
-            dateView=view;
+           dateView=view;
             mainTitleTv=(TextView)view.findViewById(R.id.main_title);
             subTitleTv=(TextView)view.findViewById(R.id.sub_title);
             iconTitleIv=(ImageView)view.findViewById(R.id.icon_title);
@@ -37,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item,parent,false);
         final ViewHolder viewHolder=new ViewHolder(view);
         viewHolder.dateView.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +47,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             public void onClick(View view) {
                 int position=viewHolder.getAdapterPosition();
                 Date date=dateList.get(position);
+                Intent intent=new Intent(parent.getContext(), EditActivity.class);
+                intent.putExtra("title",date.getTitle());
+                intent.putExtra("content",date.getContent());
+                parent.getContext().startActivity(intent);
                 Toast.makeText(view.getContext(),"fsadf"+date.getTitle(),Toast.LENGTH_SHORT).show();
             }
         });

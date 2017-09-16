@@ -14,13 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.cyc.memo.date.Date;
 import com.example.cyc.memo.date.DateHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cyc on 17-9-14.
@@ -29,7 +35,7 @@ import com.example.cyc.memo.date.DateHelper;
 public class EditActivity extends AppCompatActivity implements View.OnClickListener {
         ///MyScrollView.OnScrollListener{
 
-    private Button alarmButton;
+    private Button categoryButton;
     private Button saveButton;
 
     private EditText titleEdit;
@@ -48,6 +54,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private String listTimeEdit;
     private SQLiteDatabase database=null;
     private Cursor cursor;
+    private List list=new ArrayList();
  //   private int tabHeight,tabTop,scrollTop;
  // private LinearLayout tabLinearLayout;
  //   private View ll_temp=null;
@@ -62,11 +69,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         setListener();
     }
     public void initView(){
-        alarmButton=(Button)findViewById(R.id.alarm_btn);
+        categoryButton=(Button)findViewById(R.id.category_btn);
         saveButton=(Button)findViewById(R.id.save_btn);
         titleEdit=(EditText)findViewById(R.id.title_edit);
         contentEdit=(EditText)findViewById(R.id.content_edit);
         dateHelper=new DateHelper(this);
+        database=dateHelper.getWritableDatabase();
+        getDate();
+
+ /*       dateHelper=new DateHelper(this);
 //        initDate();
         database=dateHelper.getWritableDatabase();
         cursor=database.query("memo_data",null,null,null
@@ -78,14 +89,24 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             contentText = cursor.getString(cursor.getColumnIndex("content"));
             titleEdit.setText(titleText);
             contentEdit.setText(contentText);
-        }
+        }*/
+
+
+
    //     myScrollView=(MyScrollView)findViewById(R.id.scroll_view);
    //     myScrollView.setOnScrollListener(this);
      //   tabLinearLayout=(LinearLayout)findViewById(R.id.content_linear);
     //    manager=(WindowManager)getSystemService(Context.WINDOW_SERVICE);
     }
+    public void getDate(){
+        Intent intent=this.getIntent();
+        titleText=intent.getStringExtra("title");
+        contentText=intent.getStringExtra("content");
+        titleEdit.setText(titleText);
+        contentEdit.setText(contentText);
+    }
     public void setListener(){
-        alarmButton.setOnClickListener(this);
+        categoryButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
     }
 
@@ -93,8 +114,36 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         int id =view.getId();
         switch (id){
-            case R.id.alarm_btn:
+            case R.id.category_btn:
+                hasCategory();
+                if(!hasCategory()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    AlertDialog alertDialog=builder.create();
+                 /*   builder.setTitle("添加类别");
+                    final EditText editText = new EditText(this);
+                    editText.setSingleLine();
+                    editText.setText("类别1");
+                    editText.setSelection(0, 2);
+                    builder.setView(editText);
+                    builder.setNegativeButton("取消", null);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();*/
+                 alertDialog.show();
+                 View view1=getLayoutInflater().inflate(R.layout.category_dialog,null);
+                    Window window=alertDialog.getWindow();
+                    window.setGravity(Gravity.CENTER);
+                    window.setContentView(view1);
+                    EditText editText=(EditText)window.findViewById(R.id.category_edit);
+                    Button cancelButton=(Button)window.findViewById(R.id.cancel);
+                    Button categoryAdd=(Button)window.findViewById(R.id.category_add);
+
+                }
                 break;
             case R.id.save_btn:
                 titleText=titleEdit.getText().toString();
@@ -109,7 +158,16 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
+public boolean hasCategory(){
+    cursor=database.query("memo_data",new String[]{"category","COUNT(_id) AS count"},
+            null,null,"category",null,null);
+    if(cursor.moveToNext()){
+        String string=cursor.getString(cursor.getColumnIndex("category"));
+        list.add(string);
+    }
+    if(list.size()>1) return true;
+    else return false;
+}
  /*   @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

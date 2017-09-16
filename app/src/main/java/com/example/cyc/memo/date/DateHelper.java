@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DateHelper extends SQLiteOpenHelper {
 
-    private static String dateName="data1.db";
+    private static String dateName="data2.db";
     private static int Date_VERSION=1;
     public static final String DATE_FORMAT="YYYY-MM-DD HH:MM:SS";
     public static final String CREATE_MESSAGE="Create table memo_date (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -33,7 +33,8 @@ public class DateHelper extends SQLiteOpenHelper {
                         "clock_is text," +
                         "clock_time text," +
                         "music_name text," +
-                        "edit_last text)");
+                        "edit_last text," +
+                "category text)");
     }
 
     @Override

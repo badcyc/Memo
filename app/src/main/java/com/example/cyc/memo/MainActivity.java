@@ -32,11 +32,13 @@ import android.widget.Toast;
 import com.example.cyc.memo.date.Date;
 import com.example.cyc.memo.date.DateHelper;
 import com.example.cyc.memo.date.MyAdapter;
+import com.example.cyc.memo.ui.MainFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
+             ,MainFragment.AllMemoCallbacks{
 
     private Toolbar toolbar;
     private MenuItem menuItem;
@@ -49,10 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Category>categoryList;
     private PopupWindow popupWindow;
     private List<Date>dateList=new ArrayList<>();
-    private DateHelper dateHelper;
+   /* private DateHelper dateHelper;
     private SQLiteDatabase database;
     private Cursor cursor;
-    private MyAdapter myAdapter;
+    private MyAdapter myAdapter;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,17 +70,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         titleButton=(Button)findViewById(R.id.title_btn);
-        container=(LinearLayout)findViewById(R.id.container);
+        getFragmentManager().beginTransaction().replace(R.id.container,new MainFragment()).commit();
 
-        getDateList();
+       /* getDateList();
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
         LinearLayoutManager manager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         myAdapter=new MyAdapter(dateList);
-        recyclerView.setAdapter(myAdapter);
+        recyclerView.setAdapter(myAdapter);*/
 
     }
-    public void getDateList(){
+   /* public void getDateList(){
         dateHelper=new DateHelper(this);
         database = dateHelper.getWritableDatabase();
         cursor=database.query("memo_data",null,null,null,null,null,null,null);
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         cursor.close();
         database.close();
-    }
+    }*/
     public void initDate(){
         allNumber=0;
         collectNumber=0;
@@ -138,6 +140,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+    }
+
+    @Override
+    public void onListItemCliceked(int position, List<Date> memoList) {
+        dateList=memoList;
+
     }
 
     @Override

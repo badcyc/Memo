@@ -88,4 +88,6 @@ public class Date {
     public static String CLOCK_TIME="clock_time";
     public static String MUSIC_NAME="music_name";
     public static String EDIT_LAST="edit_last";
+    public static String CATEGORY="category";
+
 }
