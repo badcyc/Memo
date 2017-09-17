@@ -28,6 +28,7 @@
             android:drawableTop="@drawable/category2"
             android:layout_margin="0dp"/>
         <Button
+            android:id="@+id/alarm_btn"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_width="0dp"
             android:layout_weight="1"

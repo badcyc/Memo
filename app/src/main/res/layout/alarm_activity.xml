@@ -1,35 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:id="@+id/alarm_container">
 
     <LinearLayout
+        android:layout_gravity="fill_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_weight="5"
             android:id="@+id/date_tv"
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
+            android:layout_weight="1"
+            android:layout_gravity="right"
             android:id="@+id/date_choose"
             android:text="日期"
             android:drawableLeft="@drawable/menu_move"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
     <TimePicker
+        android:background="@drawable/boder"
         android:id="@+id/time_picker"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:clickable="true">
 
     </TimePicker>
     <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="0dp"
         android:paddingTop="10dp"
         android:text="重复"
-        android:textSize="20sp"
-        android:textColor="@color/background"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/sunday"
+            android:text="日"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="0.5dp"
+            android:layout_weight="1"
+            android:layout_height="2dp"
+            android:background="@color/background"/>
+        <Button
+            android:id="@+id/monday"
+            android:text="日"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_height="2dp"
+            android:background="@color/background"/>
+        <Button
+            android:id="@+id/tuesday"
+            android:text="日"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_height="2dp"
+            android:background="@color/background"/>
+        <Button
+            android:id="@+id/wednesday"
+            android:text="日"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_height="2dp"
+            android:background="@color/background"/>
+        <Button
+            android:id="@+id/thursday"
+            android:text="日"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_height="2dp"
+            android:background="@color/background"/>
+        <Button
+        android:id="@+id/friday"
+        android:text="日"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_height="2dp"
+            android:background="@color/background"/>
+        <Button
+            android:id="@+id/saturday"
+            android:text="日"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
 </LinearLayout>

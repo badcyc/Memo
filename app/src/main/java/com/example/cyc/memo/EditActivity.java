@@ -1,6 +1,7 @@
 package com.example.cyc.memo;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 
 import com.example.cyc.memo.date.Date;
 import com.example.cyc.memo.date.DateHelper;
+import com.example.cyc.memo.ui.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button categoryButton;
     private Button saveButton;
+    private Button alarmButton;
 
     private EditText titleEdit;
     private EditText contentEdit;
@@ -71,6 +74,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     public void initView(){
         categoryButton=(Button)findViewById(R.id.category_btn);
         saveButton=(Button)findViewById(R.id.save_btn);
+        alarmButton=(Button)findViewById(R.id.alarm_btn);
         titleEdit=(EditText)findViewById(R.id.title_edit);
         contentEdit=(EditText)findViewById(R.id.content_edit);
         dateHelper=new DateHelper(this);
@@ -108,6 +112,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     public void setListener(){
         categoryButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
+        alarmButton.setOnClickListener(this);
     }
 
     @Override
@@ -146,10 +151,18 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     window.setWindowAnimations(R.style.CustomDialogAnimation);
                     window.setContentView(view1);
                     EditText editText=(EditText)window.findViewById(R.id.category_edit);
+                    editText.setText("类别1");
+                    editText.setSelection(0,2);
                     Button cancelButton=(Button)window.findViewById(R.id.cancel);
                     Button categoryAdd=(Button)window.findViewById(R.id.category_add);
 
                 }
+                break;
+            case R.id.alarm_btn:
+                Intent intent1=new Intent(this, AlarmActivity.class);
+
+                startActivity(intent1);
+                overridePendingTransition(R.anim.activtity_enter,0);
                 break;
             case R.id.save_btn:
                 titleText=titleEdit.getText().toString();
