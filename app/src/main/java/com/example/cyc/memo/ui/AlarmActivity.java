@@ -33,18 +33,16 @@ public class AlarmActivity extends AppCompatActivity {
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                LayoutInflater inflater=(LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-                View view1=inflater.inflate(R.layout.date_dialog,null);
-                PopupWindow popupWindow=new PopupWindow(view1, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-              //  popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-               // popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+                PopupWindow popupWindow=new PopupWindow(AlarmActivity.this);
+                popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+                popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
                 popupWindow.setTouchable(true);
+                popupWindow.setFocusable(true);
                 popupWindow.setOutsideTouchable(true);
-               // popupWindow.setContentView(view1);
-                popupWindow.showAtLocation(alarmContainer, Gravity.BOTTOM,0,0);
+              //  popupWindow.setAnimationStyle(R.sty);
+                View view1=getLayoutInflater().inflate(R.layout.date_dialog,null);
+                popupWindow.setContentView(view1);
+                popupWindow.showAtLocation(alarmContainer,Gravity.BOTTOM,0,0);
 
             }
         });
