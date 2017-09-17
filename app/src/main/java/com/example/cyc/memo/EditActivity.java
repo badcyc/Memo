@@ -137,7 +137,13 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                  alertDialog.show();
                  View view1=getLayoutInflater().inflate(R.layout.category_dialog,null);
                     Window window=alertDialog.getWindow();
-                    window.setGravity(Gravity.CENTER);
+                    WindowManager.LayoutParams lm=window.getAttributes();
+                    lm.gravity=Gravity.CENTER;
+                    int width =getWindowManager().getDefaultDisplay().getWidth();
+                    lm.width=width-width/6;
+                    lm.height=WindowManager.LayoutParams.WRAP_CONTENT;
+                    window.setAttributes(lm);
+                    window.setWindowAnimations(R.style.CustomDialogAnimation);
                     window.setContentView(view1);
                     EditText editText=(EditText)window.findViewById(R.id.category_edit);
                     Button cancelButton=(Button)window.findViewById(R.id.cancel);
